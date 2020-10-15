@@ -64,7 +64,7 @@ open class UDatePicker: UIViewController {
         public let blankView = UIView()
         public let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
         
-        public let datePicker = UIDatePicker()
+        public var datePicker = UIDatePicker()
         public let barView = UIView()
         public let doneButton = UIButton()
         
@@ -97,6 +97,7 @@ open class UDatePicker: UIViewController {
         
         fileprivate func initView() {
             
+            widgetView.backgroundColor = .white
             self.addSubview(widgetView)
             
             // blur view
@@ -112,6 +113,11 @@ open class UDatePicker: UIViewController {
             widgetView.addSubview(datePicker)
             datePicker.datePickerMode = .date
             datePicker.backgroundColor = UIColor.white
+            if #available(iOS 13.4, *) {
+                datePicker.preferredDatePickerStyle = .wheels
+            } else {
+                // Fallback on earlier versions
+            }
             
             // bar view and done button
             widgetView.addSubview(barView)
